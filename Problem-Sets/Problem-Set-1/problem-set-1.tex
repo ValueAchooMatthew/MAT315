@@ -1,0 +1,222 @@
+\ifdefined\iscombined
+	\problemset{Problem Set 1}
+\else
+\documentclass{article}
+\usepackage{xparse}
+\usepackage{tabularx}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\date{
+	\vspace{-.75em}
+	{\large \today}
+}
+
+\title{
+	\vspace*{-1.5em}
+	{\Huge Problem Set 1} \\
+	\vspace{-1em}
+	\rule{\textwidth/2}{.01em} \\
+	\vspace{-.75em}
+}
+
+\author{
+	{\large Matthew Farah}
+}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=blue,
+	citecolor=blue,
+	anchorcolor=blue
+}
+
+\fancyhead{}
+\fancyhead[L]{\today}
+\fancyhead[R]{Problem Set 1}
+
+\setlength{\parindent}{0cm}
+
+\tikzset{vertex/.style = {shape = circle, draw, minimum size = 2em}}
+\tikzset{edge/.style = {->,> = latex'}}
+
+\newenvironment{solution}{
+	\vspace{.5em}
+	\par
+	\begin{adjustwidth}{1.5em}{}
+	\textbf{{Solution:}}
+	\par
+	\vspace{.5em}
+}{
+	\vspace{1em}
+	\end{adjustwidth}
+	\setcounter{step}{0}
+}
+
+\makeatother
+\makeatletter
+
+\newcounter{step}
+\renewcommand{\thestep}{\Roman{step}}
+
+\newenvironment{step}{
+	\refstepcounter{step}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thestep)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1.5em}
+}
+
+\newcounter{problem}
+\renewcommand{\theproblem}{\arabic{problem}}
+
+\newenvironment{problem}[1][]{
+	\newpage
+	\refstepcounter{problem}
+	\setcounter{subproblem}{0}
+	\vspace{.5em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{Problem \theproblem: }\noindent\textit{#1}
+	\par
+	\phantomsection
+	\addcontentsline{toc}{section}{\protect{\large{Problem \theproblem}}}
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+
+\newcounter{subproblem}
+\renewcommand{\thesubproblem}{\alph{subproblem}}
+
+\newenvironment{subproblem}{
+	\setcounter{step}{0}
+	\refstepcounter{subproblem}
+	\phantomsection
+	\addcontentsline{toc}{subsection}{\protect{\large{(\thesubproblem)}}}
+	\begin{adjustwidth}{1.5em}{}
+	\noindent{\textbf{(\thesubproblem) }}\ignorespaces
+}{
+	\par
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newcounter{lemma}
+\renewcommand{\thelemma}{\arabic{lemma}}
+
+\newenvironment{lemma}[1][]{
+	\refstepcounter{lemma}
+	\vspace{1em}\par\noindent
+	\noindent\textbf{Lemma ({#1}): }\noindent\ignorespaces
+}{
+	\vspace{.5em}
+}
+
+\newcounter{proposition}
+\renewcommand{\theproposition}{\arabic{proposition}}
+
+\newenvironment{proposition}{
+	\refstepcounter{proposition}
+	\vspace{1em}\par\noindent
+	\noindent\textbf{Proposition:}
+	\noindent\textit
+	\ignorespaces
+}{
+	\vspace{.5em}
+}
+
+\newcommand{\supp}[1]{\text{supp}({#1})}
+\newcommand{\ord}[1]{\text{ord}({#1})}
+\newcommand{\gen}[1]{\langle {#1} \rangle}
+\newcommand{\lcm}[2]{\text{lcm}({#1}, {#2})}
+\renewcommand{\mod}[1]{\ (\text{mod} \; {#1})}
+
+\sectionfont{\fontsize{12}{12}\bfseries}
+\subsectionfont{\fontsize{10}{12}\normalfont}
+\subsubsectionfont{\fontsize{10}{12}\normalfont}
+
+\begin{document}
+
+\maketitle
+\pagestyle{fancy}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\tableofcontents
+
+\fi
+
+\begin{problem}
+	Prove that $4 \nmid \left( n^{2} + 2 \right)$ for any integer $n$.
+\end{problem}
+
+\begin{solution}
+	Let $n \in \mathbb{Z}$ be any arbitrary integer. To prove that $n^{2} + 2$ isn't divisible by 4, (or notationally, that $4 \nmid \left(n^{2} + 2 \right)$), we'll proceed via a proof by contradiction. \\
+
+	So, for the purposes of deriving a contradiction, let's assume that there just so happened to exist some integer, $m \in \mathbb{Z}$, such that $m^{2} + 2$ was divisible by 4. Then, by definition of divisibility, we know that there must exist an integer, $k_{1} \in \mathbb{Z}$ for which $4k_{1} = m^{2} + 2$. Notice, however, that this must mean $m^{2} + 2$ is an even number, since 2 is a divisor of 4 and, as we just assumed, $m^{2} + 2$ is itself divisible by 4. Therefore we know once again, by definition of divisibility, that there must exist some other integer $k_{2}$ satisfying $2k_{2} = m^{2} + 2$. By performing some very simple manipulations, we may observe that:
+
+	\begin{align*}
+		2k_{2} &= m^{2} + 2 &&\text{(By our earlier equality)} \\
+		\implies 2k_{2} - 2 &= m^{2} &&\text{(Subtracting 2 from both sides)} \\
+		\implies 2\left(k_{2} - 1\right) &= m^{2} &&\text{(By distributivity of multiplication over addition)} \\
+	\end{align*}
+
+	Which clearly means that $m^{2}$ is an even number as well! It is a well established fact that a square being an even integer implies that its square root is even too, but to quickly prove it (for thoroughness' sake, and so I don't get docked marks!), consider some arbitrary integer $a \in \mathbb{Z}$ and assume that its square, $a^{2}$, is even. Invoking the definition of divisibility again, we therefore know that there exists some constant $l_{1} \in \mathbb{Z}$ for which $a^{2} = 2l_{1}$. We thus have that:
+
+	\begin{align*}
+		a^{2} &= 2l_{1} &&\text{(By our earlier equality)} \\
+		\implies a &= \pm \sqrt{2l_{1}} &&\text{(Applying the square root to both sides)} \\
+		&= \pm \sqrt{2}\sqrt{l_{1}} &&\text{(By distributivity of exponents over multiplication)} \\
+	\end{align*}
+
+	But remember! $a$ was assumed to be an integer! This naturally must mean that $\sqrt{2}\sqrt{l_{1}} \in \mathbb{Z}$, which would only make sense of $l_{1}$ could be expressed as a multiple of $2$ (since otherwise, $a$ would be irrational, and therefore not an integer). Hence, there exists some $l_{2} \in \mathbb{Z}$ satisfying $l_{1} = 2l_{2}$, meaning that:
+
+	\begin{align*}
+		a &= \pm \sqrt{2}\sqrt{l_{1}} &&\text{(By our earlier equality)} \\
+		&= \pm \sqrt{2}\sqrt{2l_{2}} &&\text{(By our characterization of $l_{1}$)} \\
+		&= \pm \sqrt{2}\sqrt{2}\sqrt{l_{2}} &&\text{(By distributivity of exponents over multiplication)} \\
+		&= \pm 2\sqrt{l_{2}} &&\text{(Simplifying)} \\
+	\end{align*}
+
+	And since $a$ is an integer by hypothesis, we have that $\sqrt{l_{2}}$ must be an integer, implying that $a = \pm 2l_{3}$ for some integer $l_{3}$, making $a$ even by definition of evenness and thereby proving my prior claim that if $m^{2}$ is even, then so is $m$. \\
+
+	Continuing on with our original proof, now that we know that $m^{2}$ being even implies that $m$ is even as well, we can (for the last time) assert that there exists some integer, $k_{3} \in \mathbb{Z}$ such that $2k_{3} = m$. It is here that we can now, finally, derive our contradiction. Notice that, using this characterization of $m$, we can go back to our original equation and deduce that:
+
+	\begin{align*}
+		4k_{1} &= m^{2} + 2 &&\text{(By our choice of $k_{1}$)} \\
+		\implies 4k_{1} &= \left(2k_{3}\right)^{2} + 2 &&\text{(By our characterization of $m$)} \\
+		\implies 4k_{1} &= 4k^{2}_{3} + 2 &&\text{(Expanding)} \\
+		\implies 2k_{1} &= 2k^{2}_{3} + 1 &&\text{(Dividing both sides by 2)} \\
+	\end{align*}
+
+	Which is patently ridiculous! ``Why?'' I hear you ask? Well, because in that final equality, the left-hand side is clearly an even quantity, whereas the right-hand side is clearly an odd one. This makes no sense, as a number cannot be both even and odd! Hence, our assumption that some integer $m$ existed such that $m^{2} + 2$ was even must've been wrong. \\
+
+	Therefore, since no such $m$ can possibly exist, we therefore have that $4 \nmid \left(n^{2} + 2 \right)$ for all possible $n \in \mathbb{Z}$.
+\end{solution}
+
+
+\ifdefined\iscombined
+	\newpage
+\else
+	\end{document}
+\fi
